@@ -16,4 +16,4 @@ The script computes the **total cost per department** and outputs a CSV file wit
 `license_data_flattener` is a Python script that processes a CSV file containing user license data (specifically an O365 admin Active Users export format that has the Licenses column split text-to-columns deliminated by the `+` sign) and expands multiple license entries per user into separate rows in a new CSV file. Each user may have up to 8 licenses (this limit can be modified), and the script ensures that each license is recorded individually while keeping other user details intact.
 
 - **input_file** = "/xyz/abc/Downloads/users.csv"
-- **output_file** = "/xyz/abc/Downloads/flattned_user_data.csv"
+- **output_file** = "/xyz/abc/Downloads/flattened_user_data.csv"
