@@ -1,0 +1,39 @@
+# Path to the file containing list of group names
+$GroupListPath = 'C:\Scripts\GroupsList.txt'
+
+# Output file to Desktop for the results
+$OutputFile = "$($env:USERPROFILE)\Desktop\GroupMembers.txt"
+
+# Remove the output file if it already exists
+If (Test-Path $OutputFile) {
+    Remove-Item $OutputFile -Force
+}
+
+# Read the group names from text file
+$Groups = Get-Content $GroupListPath
+
+Foreach ($Group in $Groups) {
+    Write-Host "Processing group: $Group"
+
+    # Retrieve the members of the group, filtering only 'user' objects
+    $Members = Get-ADGroupMember -Identity $Group -Recursive `
+               | Where-Object { $_.objectClass -eq 'user' }
+
+    # Add header for the group in output file
+    Add-Content -Path $OutputFile -Value "Group: $Group"
+
+    If ($Members) {
+        # List each user’s Name and SamAccountName
+        Foreach ($Member in $Members) {
+            Add-Content -Path $OutputFile -Value "  $($Member.Name) ($($Member.SamAccountName))"
+        }
+    }
+    Else {
+        Add-Content -Path $OutputFile -Value "  [No user members found]"
+    }
+
+    # Blank line for readability
+    Add-Content -Path $OutputFile -Value ""
+}
+
+Write-Host "Done! Output written to $OutputFile"
