@@ -10,6 +10,8 @@ This repo contains all of my scripts used for various tasks
 
 The script computes the **total cost per department** and outputs a CSV file with cost distribution and percentage breakdown.
 
+---
+
 ## License Data Flattener
 
 ### Overview
@@ -17,3 +19,68 @@ The script computes the **total cost per department** and outputs a CSV file wit
 
 - **input_file** = "/xyz/abc/Downloads/users.csv"
 - **output_file** = "/xyz/abc/Downloads/flattened_user_data.csv"
+
+---
+
+## Export-ADGroupMembers.ps1
+
+This PowerShell script retrieves the user members of multiple Active Directory security groups and exports the results to a neatly formatted text file on the user's Desktop.
+
+### Prerequisites
+
+- Windows PowerShell (recommended: PowerShell 5.1+)
+- Active Directory module (`Import-Module ActiveDirectory`)
+- Must be run with domain privileges that can query group membership
+
+### How to Use
+
+1. **Prepare a group list file**
+
+   Create a plain text file that contains the names of the security groups you want to check.  
+   Example path: `C:\Scripts\GroupsList.txt`
+
+   ```
+   Sales-Team
+   Finance-Admins
+   IT-Operations
+   ```
+
+2. **Run the Script**
+
+   You can run the script directly in PowerShell:
+
+   ```powershell
+   .\Export-ADGroupMembers.ps1
+   ```
+
+   Make sure the script file is in the same directory, or adjust the path accordingly.
+
+3. **Output**
+
+   The script generates a file named `GroupMembers.txt` on your Desktop.
+
+   Example output:
+   ```
+   Group: Sales-Team
+     Alice Johnson (ajohnson)
+     Bob Smith (bsmith)
+
+   Group: Finance-Admins
+     Charlie Green (cgreen)
+   ```
+
+### Configuration
+
+Edit the following line in the script if you use a different path for your group list file:
+
+```powershell
+$GroupListPath = 'C:\Scripts\GroupsList.txt'
+```
+
+### Features
+
+- Supports up to 25+ security groups
+- Resolves nested group members (recursive lookup)
+- Filters to include only user accounts
+- Output is clean and grouped by security group name
+
