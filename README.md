@@ -1,5 +1,5 @@
-# python_scripts
-This repo contains all of my Python scripts used for various tasks
+# scripts
+This repo contains all of my scripts used for various tasks
 ## Department License Cost Allocator
 
 ### Overview
